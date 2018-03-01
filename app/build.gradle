@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.trmubaiwa.blueprint"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    /** android Design libraries */
+    compile "com.android.support:recyclerview-v7:26.1.0"
+
+
+    /** Other Design libraries */
+
+
+
+    /** Architecture Components */
+
+
+
+    /** Koin Dependency Injection */
+    compile "org.koin:koin-android:$koin_version"
+    compile "org.koin:koin-android-architecture:$koin_version"
+
+
+
+    /** Anko Libraries*/
+    compile "org.jetbrains.anko:anko:$anko_version"
+    compile "org.jetbrains.anko:anko-commons:$anko_version"
+    compile "org.jetbrains.anko:anko-design:$anko_version"
+
+
+
+    /** Squire libraries, Retrofit moshi Gson for Kotlin etc */
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.moshi:moshi-kotlin:1.5.0'
+    compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    compile "com.squareup.retrofit2:converter-gson:2.3.0"
+
+    /** Android Coroutine libraries */
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.3"
+
+
+    /** Testing libraries */
+    testImplementation "org.koin:koin-test:0.8.2"
+
+
+
+}
