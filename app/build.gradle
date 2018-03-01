@@ -58,9 +58,11 @@ dependencies {
 
     /** Squire libraries, Retrofit moshi Gson for Kotlin etc */
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.moshi:moshi:1.5.0'
     compile 'com.squareup.moshi:moshi-kotlin:1.5.0'
     compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
     compile "com.squareup.retrofit2:converter-gson:2.3.0"
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
 
     /** Android Coroutine libraries */
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.3"
