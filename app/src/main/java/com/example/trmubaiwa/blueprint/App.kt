@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import com.example.trmubaiwa.blueprint.Repositories.UserRepository
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
-import com.squareup.moshi.Moshi
 import okhttp3.ResponseBody
 import org.koin.android.architecture.ext.viewModel
 import org.koin.android.ext.android.startKoin
