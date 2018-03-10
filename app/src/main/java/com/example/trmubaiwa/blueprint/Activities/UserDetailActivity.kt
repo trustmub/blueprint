@@ -19,7 +19,7 @@ class UserDetailActivity : AppCompatActivity() {
     private val userViewModel by inject<UserViewModel>()
     private var phonenumber = ""
     private var email = ""
-    var location = arrayOf<Long>()
+    var location = arrayOf<Float>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +35,11 @@ class UserDetailActivity : AppCompatActivity() {
                     it.id == passedUserDetails.toInt()
                 }!!.map {
                     nameDetailsText.text = it.name
+                    Log.d("User", "The value is ${nameDetailsText.text} ")
+
                     phonenumber = it.phone
                     email = it.email
-                    location = arrayOf(it.address.geo.lat.toLong(), it.address.geo.lng.toLong())
+                    location = arrayOf(it.address.geo.lat.toFloat(), it.address.geo.lng.toFloat())
                 }
             })
         }
@@ -45,6 +47,12 @@ class UserDetailActivity : AppCompatActivity() {
 
         emailImage.setOnClickListener {
             toast("Email clicked")
+        }
+        callImage.setOnClickListener {
+            toast("Call Icon Clicked")
+        }
+        locationImage.setOnClickListener {
+            toast("Location clicked with ${location[0]} and ${location[1]}")
         }
 
         fab.setOnClickListener { view ->

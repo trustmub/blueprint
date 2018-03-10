@@ -1,6 +1,7 @@
 package com.example.trmubaiwa.blueprint.Activities
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -29,7 +30,9 @@ class UsersListActivity : AppCompatActivity() {
 
         userViewModel.getUsers().observe(this, Observer {
             adapter = UserListRecyclerAdapter(this, it!!){
-                startActivity(intentFor<UserDetailActivity>(EXTRA_USERDETAILS to it.id).singleTop())
+                val detailsIntent = Intent(this, UserDetailActivity::class.java)
+                detailsIntent.putExtra(EXTRA_USERDETAILS, it.id.toString())
+                startActivity(detailsIntent)
             }
             userListView.adapter = adapter
             userListView.layoutManager = layoutManager
