@@ -28,7 +28,7 @@ open class App : Application() {
 
     /** for all your view models that you will need to inject */
     open fun getViewModelModules(): Module = applicationContext {
-        viewModel { UserViewModel() }
+        viewModel { UserViewModel(get()) }
     }
 
     /** for all you repositories that you need to inject */

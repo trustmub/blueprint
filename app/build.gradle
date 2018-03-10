@@ -41,8 +41,6 @@ dependencies {
     compile 'com.android.support:animated-vector-drawable:26.1.0'
     compile 'com.android.support:design:26.1.0'
 
-
-
     /** Other Design libraries */
 
     /** Architecture Components */
