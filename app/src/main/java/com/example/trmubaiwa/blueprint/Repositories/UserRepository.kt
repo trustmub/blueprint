@@ -4,13 +4,24 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.LiveData
 
 import com.example.trmubaiwa.blueprint.Models.UserModel
+import com.example.trmubaiwa.blueprint.Rooms.UserDao
+import com.example.trmubaiwa.blueprint.Rooms.UserEntity
 import com.example.trmubaiwa.blueprint.Services.Webservice
+import org.w3c.dom.Entity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.ExecutorService
 
 
-class UserRepository constructor(private val webservice: Webservice) {
+class UserRepository constructor(private val webservice: Webservice, private val userDao: UserDao, private val executorService: ExecutorService) {
+
+    fun insertUsers(users: List<UserEntity>?) {
+        executorService.execute {
+            userDao.insertUsers(users)
+        }
+    }
+
 
     fun getUsers(): LiveData<List<UserModel>> {
         val data: MutableLiveData<List<UserModel>> = MutableLiveData()

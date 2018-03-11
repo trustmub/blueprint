@@ -15,11 +15,23 @@ interface UserDao {
     fun insertUser(user: UserEntity) {
     }
 
+    /** replaces all the record in the database is there are duplicates
+     *  and adding new ones if there is any
+     */
+    @Insert(onConflict = REPLACE)
+    fun insertUsers(userList: List<UserEntity>?)
+
     @Query("SELECT * FROM users ")
     fun getUsers(): List<UserModel>
 
+    /** this will delete all the records in the database*/
+    @Query("DELETE FROM users")
+    fun deleteUsers()
+
+    /** This will delete that particular user record passed on the
+     * os an argument
+     */
     @Delete
-    fun deleteUser(user: UserEntity) {
-    }
+    fun deleteUser(user: UserEntity)
 
 }

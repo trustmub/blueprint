@@ -33,7 +33,7 @@ open class App : Application() {
 
     /** for all you repositories that you need to inject */
     open fun getRepositoryModule(): Module = applicationContext {
-        provide { UserRepository(get()) }
+        provide { UserRepository(get(), get(),get()) }
     }
 
     /**  */

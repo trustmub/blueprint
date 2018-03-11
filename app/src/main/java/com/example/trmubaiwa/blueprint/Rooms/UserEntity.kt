@@ -7,12 +7,12 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "users")
 data class UserEntity(
         @PrimaryKey(autoGenerate = false)
-        @ColumnInfo(name = "gender") val gender: String,
-        @ColumnInfo(name = "initials") val initials: String,
-        @ColumnInfo(name = "surname") val surname: String,
-        @ColumnInfo(name = "dateOfBirth") val dateOfBirth: String,
-        @ColumnInfo(name = "clientNumber") val clientNumber: String,
-        @ColumnInfo(name = "id") val id: String,
-        @ColumnInfo(name = "title") val title: String,
-        @ColumnInfo(name = "age") val age: Int
+        @ColumnInfo(name = "id") val id: Int,
+        @ColumnInfo(name = "name") val name: String,
+        @ColumnInfo(name = "phone") val phone: String,
+        @ColumnInfo(name = "username") val username: String,
+        @ColumnInfo(name = "company") val company: String,
+        @ColumnInfo(name = "email") val email: String,
+        @ColumnInfo(name = "city") val city: String,
+        @ColumnInfo(name = "website") val website: String
 )

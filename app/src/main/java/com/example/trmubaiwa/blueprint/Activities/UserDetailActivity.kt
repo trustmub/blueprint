@@ -46,10 +46,10 @@ class UserDetailActivity : AppCompatActivity() {
 
 
         emailImage.setOnClickListener {
-            toast("Email clicked")
+            toast("Email clicked $email ")
         }
         callImage.setOnClickListener {
-            toast("Call Icon Clicked")
+            toast("Call Icon Clicked $phonenumber")
         }
         locationImage.setOnClickListener {
             toast("Location clicked with ${location[0]} and ${location[1]}")
