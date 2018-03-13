@@ -24,12 +24,12 @@ interface UserDao {
     @Query("SELECT * FROM users ")
     fun getUsers(): List<UserModel>
 
-    /** this will delete all the records in the database*/
+    /** this will delete all the records in the database */
     @Query("DELETE FROM users")
     fun deleteUsers()
 
     /** This will delete that particular user record passed on the
-     * os an argument
+     * function as an argument
      */
     @Delete
     fun deleteUser(user: UserEntity)

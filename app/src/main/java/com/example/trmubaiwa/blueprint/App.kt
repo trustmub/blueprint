@@ -23,7 +23,33 @@ open class App : Application() {
         super.onCreate()
 
         /** Start Koin dependency injection */
-        startKoin(this, listOf(getViewModelModules(), getRepositoryModule(), getLibrariesModule(), getDatabaseModule(), getApiModule()))
+        startKoin(this, listOf(getGeneralModule(), getDatabaseModule(), getApiModule(), getViewModelModules(), getRepositoryModule(), getLibrariesModule()))
+    }
+
+    open fun getGeneralModule() = applicationContext {
+        provide(name = "context") { applicationContext }
+    }
+
+    /** We are using the Room Object Relational mapper for android
+     *  Which takes context as an argument
+     *  Note: change the name of the database relevant to your app
+     */
+    open fun getDatabaseModule() = applicationContext {
+        provide(isSingleton = true) { Room.databaseBuilder(get("context"), AppDatabase::class.java, "blueprint-db").build() }
+        provide(isSingleton = false) { get<AppDatabase>().userDao() }
+    }
+
+    /**
+     * Set You APIs here
+     * */
+    open fun getApiModule(): Module = applicationContext {
+        provide(isSingleton = true) { get<Retrofit>().create<Webservice>(Webservice::class.java) }
+        provide(isSingleton = true) {
+            Retrofit.Builder()
+                    .baseUrl("http://jsonplaceholder.typicode.com")
+                    .addConverterFactory(MoshiConverterFactory.create())
+                    .build()
+        }
     }
 
     /** for all your view models that you will need to inject */
@@ -33,48 +59,15 @@ open class App : Application() {
 
     /** for all you repositories that you need to inject */
     open fun getRepositoryModule(): Module = applicationContext {
-        provide { UserRepository(get(), get(),get()) }
+        provide { UserRepository(get()) }
     }
 
     /**  */
     open fun getLibrariesModule(): Module = applicationContext {
         provide(name = "context") { applicationContext }
-        provide(isSingleton = true) { createAppDatabase(get()) }
-        provide(isSingleton = false) { createSomeDefinedDao() }
         provide(isSingleton = true) { createErrorConverter(get()) }
     }
 
-    open fun getDatabaseModule(): Module = applicationContext {
-        provide(isSingleton = true) { createAppDatabase(get("context")) }
-        provide(isSingleton = true) { createAppDatabase(get("context")).userDao() }
-    }
-
-    /**
-     * Set You APIs here
-     * */
-    open fun getApiModule(): Module = org.koin.dsl.module.applicationContext {
-        provide(isSingleton = true) { get<Retrofit>().create<Webservice>(Webservice::class.java) }
-        provide(isSingleton = true) {
-            Retrofit.Builder()
-                    .baseUrl("http://jsonplaceholder.typicode.com")
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .build()
-        }
-
-
-    }
-
-    /** We are using the Room Objed Relational mapper for android
-     *  Which takes context as an argument
-     *  Note: change the name of the database relevant to your app
-     */
-    private fun createAppDatabase(context: Context) =
-            Room.databaseBuilder(context, AppDatabase::class.java, "blueprint_db").build()
-
-    /** if you have a DAO you create a function for it from the template below
-     *
-     */
-    private fun createSomeDefinedDao() {}
 
     /**
      *

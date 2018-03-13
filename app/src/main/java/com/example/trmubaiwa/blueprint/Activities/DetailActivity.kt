@@ -8,61 +8,51 @@ import android.util.Log
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
-
-import kotlinx.android.synthetic.main.activity_user_detail.*
-import kotlinx.android.synthetic.main.content_user_detail.*
-import org.jetbrains.anko.email
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.android.ext.android.inject
 
-class UserDetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
     private val userViewModel by inject<UserViewModel>()
-    private var phonenumber = ""
+    private var phoneNumber = ""
     private var email = ""
     private var location = arrayOf<Float>()
+private var detailsState = DetailsState.CLOSED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_detail)
+        setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
-        val passedUserDetails = intent.getStringExtra(EXTRA_USER_DETAILS)
-        Log.d("User", "The value is $passedUserDetails ")
 
-        nameDetailsText.text = passedUserDetails
+        val passedUserDetails = intent.getStringExtra(EXTRA_USER_DETAILS)
+        Log.d("User", "The Passed Value is $passedUserDetails ")
+
         if (passedUserDetails != null) {
             userViewModel.getUsers().observe(this, Observer {
                 it?.filter {
                     it.id == passedUserDetails.toInt()
                 }!!.map {
-                    nameDetailsText.text = it.name
-                    Log.d("User", "The value is ${nameDetailsText.text} ")
-
-                    phonenumber = it.phone
+                    Log.d("User", "The Name is ${it.name} ")
+                    phoneNumber = it.phone
                     email = it.email
                     location = arrayOf(it.address.geo.lat.toFloat(), it.address.geo.lng.toFloat())
                 }
             })
         }
 
-
-        emailImage.setOnClickListener {
-            toast("Email clicked $email ")
-            email(email, "Send from application", "Email body content")
-        }
-        callImage.setOnClickListener {
-            toast("Call Icon Clicked $phonenumber")
-
-        }
-        locationImage.setOnClickListener {
-            toast("Location clicked with ${location[0]} and ${location[1]}")
-        }
-
         fab.setOnClickListener { view ->
+            fab.toggle()
+//            if(detailsState == DetailsState.CLOSED){
+//                fab.layoutParams.height = 500
+//                detailsState = DetailsState.OPENED
+//            } else{
+//                fab.layoutParams.height = 16
+//                detailsState = DetailsState.CLOSED
+//            }
+
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
     }
 
-
+    enum class DetailsState{OPENED, CLOSED}
 }
