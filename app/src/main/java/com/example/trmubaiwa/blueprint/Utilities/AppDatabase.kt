@@ -8,6 +8,6 @@ import com.example.trmubaiwa.blueprint.Rooms.UserEntity
 
 @Database(entities = arrayOf(UserEntity::class), version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
-    /** add your DAO here */
+    /** add your DAO here as abstract functions */
     abstract fun userDao(): UserDao
 }

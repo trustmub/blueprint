@@ -2,21 +2,25 @@ package com.example.trmubaiwa.blueprint.Activities
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.sample_fragment_layout.*
 import org.koin.android.ext.android.inject
 
-class DetailActivity : AppCompatActivity() {
+
+class DetailActivity : AppCompatActivity(), View.OnClickListener {
+
+
     private val userViewModel by inject<UserViewModel>()
     private var phoneNumber = ""
     private var email = ""
     private var location = arrayOf<Float>()
-private var detailsState = DetailsState.CLOSED
+    private var detailsState = DetailsState.CLOSED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,20 +43,26 @@ private var detailsState = DetailsState.CLOSED
             })
         }
 
-        fab.setOnClickListener { view ->
-            fab.toggle()
-//            if(detailsState == DetailsState.CLOSED){
-//                fab.layoutParams.height = 500
-//                detailsState = DetailsState.OPENED
-//            } else{
-//                fab.layoutParams.height = 16
-//                detailsState = DetailsState.CLOSED
-//            }
+        expandable_layout_0.setOnExpansionUpdateListener({ _, state -> Log.d("ExpandableLayout0", "State: $state") })
 
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        expandable_layout_1.setOnExpansionUpdateListener({ _, state -> Log.d("ExpandableLayout1", "State: $state") })
+        expandable_layout_1.collapse()
+        expandable_layout_0.collapse()
+
+        expand_button.setOnClickListener(this)
+
+    }
+
+    override fun onClick(view: View) {
+        when {
+            expandable_layout_0.isExpanded -> expandable_layout_0.collapse()
+            expandable_layout_1.isExpanded -> expandable_layout_1.collapse()
+            else -> {
+                expandable_layout_0.expand()
+                expandable_layout_1.expand()
+            }
         }
     }
 
-    enum class DetailsState{OPENED, CLOSED}
+    enum class DetailsState { OPENED, CLOSED }
 }

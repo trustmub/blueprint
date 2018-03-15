@@ -14,13 +14,13 @@ import retrofit2.Response
 import java.util.concurrent.ExecutorService
 
 
-class UserRepository constructor(private val webservice: Webservice/**, private val userDao: UserDao , private val executorService: ExecutorService*/) {
+class UserRepository constructor(private val webservice: Webservice, private val userDao: UserDao, private val executorService: ExecutorService) {
 
-//    fun insertUsers(users: List<UserEntity>?) {
-//        executorService.execute {
-//            userDao.insertUsers(users)
-//        }
-//    }
+    fun insertUsers(users: List<UserEntity>?) {
+        executorService.execute {
+            userDao.insertUsers(users)
+        }
+    }
 
 
     fun getUsers(): LiveData<List<UserModel>> {

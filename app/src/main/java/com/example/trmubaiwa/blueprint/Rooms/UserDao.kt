@@ -22,7 +22,7 @@ interface UserDao {
     fun insertUsers(userList: List<UserEntity>?)
 
     @Query("SELECT * FROM users ")
-    fun getUsers(): List<UserModel>
+    fun getUsers(): List<UserEntity>
 
     /** this will delete all the records in the database */
     @Query("DELETE FROM users")

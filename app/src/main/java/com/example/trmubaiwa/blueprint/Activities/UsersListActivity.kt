@@ -13,12 +13,13 @@ import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_users_list.*
 import org.jetbrains.anko.AnkoLogger
+import org.koin.android.architecture.ext.viewModel
 import org.koin.android.ext.android.inject
 
 class UsersListActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var adapter: UserListRecyclerAdapter
-    private val userViewModel by inject<UserViewModel>()
+    private val userViewModel by viewModel<UserViewModel>()
     private lateinit var layoutManager: LinearLayoutManager
 
 //    private var newUserList = mutableListOf<UserEntity>()

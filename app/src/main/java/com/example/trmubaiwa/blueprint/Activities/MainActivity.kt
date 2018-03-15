@@ -15,5 +15,9 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton.setOnClickListener {
             startActivity(intentFor<UsersListActivity>())
         }
+
+        floatingActionTwo.setOnClickListener{
+            startActivity(intentFor<ScrollingActivity>())
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.trmubaiwa.blueprint.Adapters
 
-import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,12 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.trmubaiwa.blueprint.Models.UserModel
 import com.example.trmubaiwa.blueprint.R
-import kotlinx.android.synthetic.main.user_list_layout.view.*
-import java.util.*
 
-/**
- * Created by trmubaiwa on 2018/03/10.
- */
+
 class UserListRecyclerAdapter(val context: Context, private val userList: List<UserModel>, private val itemClick: (UserModel) -> Unit) : RecyclerView.Adapter<UserListRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {

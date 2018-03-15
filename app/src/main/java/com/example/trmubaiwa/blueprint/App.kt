@@ -15,6 +15,7 @@ import org.koin.dsl.module.applicationContext
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.Executors
 
 
 open class App : Application() {
@@ -23,7 +24,7 @@ open class App : Application() {
         super.onCreate()
 
         /** Start Koin dependency injection */
-        startKoin(this, listOf(getGeneralModule(), getDatabaseModule(), getApiModule(), getViewModelModules(), getRepositoryModule(), getLibrariesModule()))
+        startKoin(this, listOf(getGeneralModule(), getDatabaseModule(), getApiModule(), getRepositoryModule(), getViewModelModules(), getLibrariesModule()))
     }
 
     open fun getGeneralModule() = applicationContext {
@@ -34,7 +35,7 @@ open class App : Application() {
      *  Which takes context as an argument
      *  Note: change the name of the database relevant to your app
      */
-    open fun getDatabaseModule() = applicationContext {
+    open fun getDatabaseModule(): Module = applicationContext {
         provide(isSingleton = true) { Room.databaseBuilder(get("context"), AppDatabase::class.java, "blueprint-db").build() }
         provide(isSingleton = false) { get<AppDatabase>().userDao() }
     }
@@ -59,20 +60,18 @@ open class App : Application() {
 
     /** for all you repositories that you need to inject */
     open fun getRepositoryModule(): Module = applicationContext {
-        provide { UserRepository(get()) }
+        provide { UserRepository(get(), get(), get()) }
     }
 
     /**  */
     open fun getLibrariesModule(): Module = applicationContext {
-        provide(name = "context") { applicationContext }
         provide(isSingleton = true) { createErrorConverter(get()) }
+        provide(isSingleton = true) { Executors.newCachedThreadPool() }
     }
-
 
     /**
      *
      */
     private fun createErrorConverter(retrofit: Retrofit): Converter<ResponseBody, Error> =
             retrofit.responseBodyConverter(Error::class.java, arrayOfNulls<Annotation>(0))
-
 }
