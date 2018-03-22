@@ -22,6 +22,14 @@ class UserRepository constructor(private val webservice: Webservice, private val
         }
     }
 
+    fun getUserFromDb(): LiveData<List<UserEntity>> {
+        val dbUsers: MutableLiveData<List<UserEntity>> = MutableLiveData()
+        executorService.execute {
+            dbUsers.postValue(userDao.getUsers())
+        }
+        return dbUsers
+    }
+
 
     fun getUsers(): LiveData<List<UserModel>> {
         val data: MutableLiveData<List<UserModel>> = MutableLiveData()
