@@ -14,7 +14,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    flavorDimensions "dev"
+    flavorDimensions "versionCode"
     buildTypes {
         release {
             minifyEnabled false
@@ -28,6 +28,14 @@ android {
     }
     productFlavors {
         dev {
+            minSdkVersion 21
+            applicationId 'com.example.trmubaiwa.blueprint'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 1
+            versionName '1.0'
+        }
+        pre {
             minSdkVersion 21
             applicationId 'com.example.trmubaiwa.blueprint'
             targetSdkVersion 26
