@@ -5,3 +5,4 @@ package com.example.trmubaiwa.blueprint.Utilities
  */
 
 const val EXTRA_USER_DETAILS = "user_details"
+const val OFFLINE_EXTRA_USER_DETAILS = "offline_user_details"

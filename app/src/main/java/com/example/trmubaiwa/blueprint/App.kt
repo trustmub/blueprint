@@ -2,7 +2,6 @@ package com.example.trmubaiwa.blueprint
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import android.content.Context
 import com.example.trmubaiwa.blueprint.Repositories.UserRepository
 import com.example.trmubaiwa.blueprint.Services.Webservice
 import com.example.trmubaiwa.blueprint.Utilities.AppDatabase
@@ -15,6 +14,7 @@ import org.koin.dsl.module.applicationContext
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 import java.util.concurrent.Executors
 
 
@@ -26,6 +26,7 @@ open class App : Application() {
         /** Start Koin dependency injection */
         startKoin(this, listOf(getGeneralModule(), getDatabaseModule(), getApiModule(), getRepositoryModule(), getViewModelModules(), getLibrariesModule()))
     }
+
 
     open fun getGeneralModule() = applicationContext {
         provide(name = "context") { applicationContext }
@@ -63,6 +64,7 @@ open class App : Application() {
         provide { UserRepository(get(), get(), get()) }
     }
 
+
     /**
      * get all other libraries that are that need to be injected
      */
@@ -76,4 +78,6 @@ open class App : Application() {
      */
     private fun createErrorConverter(retrofit: Retrofit): Converter<ResponseBody, Error> =
             retrofit.responseBodyConverter(Error::class.java, arrayOfNulls<Annotation>(0))
+
+
 }

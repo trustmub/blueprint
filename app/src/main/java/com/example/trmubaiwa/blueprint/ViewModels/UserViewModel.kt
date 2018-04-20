@@ -11,5 +11,7 @@ class UserViewModel constructor(private val userRepository: UserRepository) : Vi
 
     fun getUsers(): LiveData<List<UserModel>> = userRepository.getUsers()
 
+    fun getDbUsers(): LiveData<List<UserEntity>> = userRepository.getUserFromDb()
+
     fun setUsers(usersList: List<UserEntity>?) = userRepository.insertUsers(usersList)
 }

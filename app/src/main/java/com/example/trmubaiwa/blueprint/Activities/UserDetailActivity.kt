@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
+import com.example.trmubaiwa.blueprint.Enums.DataAccessType
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
@@ -16,7 +18,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
-class UserDetailActivity : AppCompatActivity() {
+class UserDetailActivity : BaseActivity() {
     private val userViewModel by inject<UserViewModel>()
     private var phonenumber = ""
     private var email = ""
@@ -26,11 +28,16 @@ class UserDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_detail)
         setSupportActionBar(toolbar)
+
         val passedUserDetails = intent.getStringExtra(EXTRA_USER_DETAILS)
+
         Log.d("User", "The value is $passedUserDetails ")
+        Log.d("User", "The value is ${DataAccessType.values().get(1)} ")
 
         nameDetailsText.text = passedUserDetails
+
         if (passedUserDetails != null) {
+            Log.d("User", "The value at index 0 Zero ${passedUserDetails[0]} ")
             userViewModel.getUsers().observe(this, Observer {
                 it?.filter {
                     it.id == passedUserDetails.toInt()

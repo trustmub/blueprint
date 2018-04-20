@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.sample_fragment_layout.*
 import org.koin.android.ext.android.inject
 
 
-class DetailActivity : AppCompatActivity(), View.OnClickListener {
+class DetailActivity : BaseActivity(), View.OnClickListener {
 
 
     private val userViewModel by inject<UserViewModel>()
@@ -31,6 +32,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("User", "The Passed Value is $passedUserDetails ")
 
         if (passedUserDetails != null) {
+
+            Log.d("User", "The value at index 0 Zero ${passedUserDetails[0]} ")
+
             userViewModel.getUsers().observe(this, Observer {
                 it?.filter {
                     it.id == passedUserDetails.toInt()
