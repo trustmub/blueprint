@@ -64,7 +64,10 @@ open class App : Application() {
         provide { UserRepository(get(), get(), get()) }
     }
 
-    /** */
+
+    /**
+     * get all other libraries that are that need to be injected
+     */
     open fun getLibrariesModule(): Module = applicationContext {
         provide(isSingleton = true) { createErrorConverter(get()) }
         provide(isSingleton = true) { Executors.newCachedThreadPool() }

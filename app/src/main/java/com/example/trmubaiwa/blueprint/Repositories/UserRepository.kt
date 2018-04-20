@@ -2,6 +2,7 @@ package com.example.trmubaiwa.blueprint.Repositories
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.LiveData
+import android.util.Log
 
 import com.example.trmubaiwa.blueprint.Models.UserModel
 import com.example.trmubaiwa.blueprint.Rooms.UserDao
@@ -51,6 +52,7 @@ class UserRepository constructor(private val webservice: Webservice, private val
 
                 else -> {
                     val errorBody = response?.body()
+                    Log.e("Network", errorBody.toString())
                     errorBody
                 }
             }
