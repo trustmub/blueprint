@@ -41,6 +41,7 @@ dependencies {
     compile 'com.android.support:design:26.1.0'
 
     /** Other Design libraries */
+    implementation 'uk.co.samuelwall:material-tap-target-prompt:2.7.0'
 
     /** Architecture Components */
     implementation "android.arch.lifecycle:extensions:1.1.0"
