@@ -17,8 +17,5 @@ class MainActivity : BaseActivity() {
             startActivity(intentFor<UsersListActivity>())
         }
 
-        floatingActionTwo.setOnClickListener{
-            startActivity(intentFor<ScrollingActivity>())
-        }
     }
 }

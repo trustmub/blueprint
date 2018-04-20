@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Blueprint.iml" filepath="$PROJECT_DIR$/Blueprint.iml" />
       <module fileurl="file://C:\Users\trustmub\AndroidStudioProjects\blueprint\Blueprint.iml" filepath="C:\Users\trustmub\AndroidStudioProjects\blueprint\Blueprint.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\trustmub\AndroidStudioProjects\blueprint\app\app.iml" filepath="C:\Users\trustmub\AndroidStudioProjects\blueprint\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blueprint.iml" filepath="$PROJECT_DIR$/blueprint.iml" />
     </modules>
   </component>
 </project>

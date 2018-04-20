@@ -10,15 +10,11 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App().registerSessionListener(this)
-
-        App().startUserSession()
     }
 
     /** Interaction method ot detect  */
     override fun onUserInteraction() {
         super.onUserInteraction()
-        App().onUserInteracted()
     }
 
 
