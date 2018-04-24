@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "311399011139",
+    "firebase_url": "https://blueprint-68f04.firebaseio.com",
+    "project_id": "blueprint-68f04",
+    "storage_bucket": "blueprint-68f04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311399011139:android:033030cd946cff1d",
+        "android_client_info": {
+          "package_name": "com.example.trmubaiwa.blueprint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311399011139-qshorinf00f4g8rde7onfglhv26sao8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgK7kupo25KgkwL7zF0Pc7eiW19LHcw6U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
