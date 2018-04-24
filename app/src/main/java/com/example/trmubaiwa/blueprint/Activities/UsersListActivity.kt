@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.Adapters.OffLineUserListRecyclerAdapter
 import com.example.trmubaiwa.blueprint.Adapters.UserListRecyclerAdapter
@@ -34,7 +34,7 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
         setContentView(R.layout.activity_users_list)
         layoutManager = LinearLayoutManager(this)
 
-
+        showProgressBar(true)
         if (isNetworkAvailable()) {
             getListFromApi()
         } else {
@@ -46,6 +46,7 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
 
     private fun getListFromApi() {
         userViewModel.getUsers().observe(this, Observer {
+            showProgressBar(false)
             adapter = UserListRecyclerAdapter(this, it!!) {
                 val detailsIntent = Intent(this, UserDetailActivity::class.java)
                 detailsIntent.putExtra(EXTRA_USER_DETAILS, arrayOf(DataAccessType.ONLINE, it.id.toString()))
@@ -60,6 +61,7 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
 
     private fun getListFromDatabase() {
         userViewModel.getDbUsers().observe(this, Observer {
+            showProgressBar(false)
             offLineAdapter = OffLineUserListRecyclerAdapter(this, it!!) {
                 val detailsIntent = Intent(this, UserDetailActivity::class.java)
                 detailsIntent.putExtra(EXTRA_USER_DETAILS, arrayOf(DataAccessType.OFFLINE, it.id.toString()))
@@ -87,5 +89,10 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
         val activeNetwokInfo = connectivityManager.activeNetworkInfo
         return activeNetwokInfo != null && activeNetwokInfo.isConnectedOrConnecting
 
+    }
+
+
+    private fun showProgressBar(state: Boolean) {
+        progressBar.visibility = if (state) View.VISIBLE else View.GONE
     }
 }

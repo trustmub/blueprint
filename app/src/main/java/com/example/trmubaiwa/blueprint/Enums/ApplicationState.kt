@@ -1,7 +1,4 @@
 package com.example.trmubaiwa.blueprint.Enums
 
-/**
- * Created by trustmub on 2018/04/24.
- */
-enum class ApplicationState {
-}
+enum class TaskState { STOP, START, COUNT_DOWN, EXPIRED }
+enum class ApplicationState { FOREGROUNDED, BACKGROUNDED }

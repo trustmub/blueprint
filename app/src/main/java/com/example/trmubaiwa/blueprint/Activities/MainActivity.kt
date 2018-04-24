@@ -5,15 +5,22 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.R
+import com.example.trmubaiwa.blueprint.ViewModels.AutoLogoutViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
+import org.koin.android.ext.android.inject
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 
 class MainActivity : BaseActivity() {
 
+    private val aLViewModel by inject<AutoLogoutViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        aLViewModel.getActiveExpirationTime()
+
         showFabPrompt()
         floatingActionButton.setOnClickListener {
             startActivity(intentFor<UsersListActivity>())

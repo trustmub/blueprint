@@ -2,10 +2,13 @@ package com.example.trmubaiwa.blueprint
 
 import android.app.Application
 import android.arch.persistence.room.Room
+import com.example.trmubaiwa.blueprint.Repositories.ALRepository
 import com.example.trmubaiwa.blueprint.Repositories.UserRepository
 import com.example.trmubaiwa.blueprint.Services.Webservice
 import com.example.trmubaiwa.blueprint.Utilities.AppDatabase
+import com.example.trmubaiwa.blueprint.ViewModels.AutoLogoutViewModel
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import okhttp3.ResponseBody
 import org.koin.android.architecture.ext.viewModel
 import org.koin.android.ext.android.startKoin
@@ -14,7 +17,6 @@ import org.koin.dsl.module.applicationContext
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
 import java.util.concurrent.Executors
 
 
@@ -30,6 +32,7 @@ open class App : Application() {
 
     open fun getGeneralModule() = applicationContext {
         provide(name = "context") { applicationContext }
+        provide(isSingleton = true) { FirebaseRemoteConfig.getInstance() }
     }
 
     /** We are using the Room Object Relational mapper for android
@@ -57,11 +60,13 @@ open class App : Application() {
     /** for all your view models that you will need to inject */
     open fun getViewModelModules(): Module = applicationContext {
         viewModel { UserViewModel(get()) }
+        viewModel { AutoLogoutViewModel(get()) }
     }
 
     /** for all you repositories that you need to inject */
     open fun getRepositoryModule(): Module = applicationContext {
         provide { UserRepository(get(), get(), get()) }
+        provide { ALRepository(get()) }
     }
 
 

@@ -41,7 +41,7 @@ class UserRepository constructor(private val webservice: Webservice, private val
 
     inner class UsersCallback(val data: MutableLiveData<List<UserModel>>) : Callback<List<UserModel>> {
         override fun onFailure(call: Call<List<UserModel>>?, t: Throwable?) {
-
+            Log.d("Error", "the error is ${t?.message}")
         }
 
         override fun onResponse(call: Call<List<UserModel>>?, response: Response<List<UserModel>>?) {
