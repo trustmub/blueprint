@@ -1,8 +1,12 @@
 package com.example.trmubaiwa.blueprint.Activities
 
-import android.support.v7.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.app.Fragment
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v4.app.DialogFragment
+import android.util.Log
+import com.example.trmubaiwa.blueprint.Activities.autologout.CountDownDialogFragment
 import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.ViewModels.AutoLogoutViewModel
@@ -22,8 +26,15 @@ class MainActivity : BaseActivity() {
         aLViewModel.getActiveExpirationTime()
 
         showFabPrompt()
+
         floatingActionButton.setOnClickListener {
             startActivity(intentFor<UsersListActivity>())
+        }
+
+        btn_start_countdown.setOnClickListener {
+            Log.d("Timer","start Countdown clicked")
+            showDialof(CountDownDialogFragment())
+
         }
 
     }
@@ -46,5 +57,14 @@ class MainActivity : BaseActivity() {
                     .show()
 
         }
+    }
+
+    @SuppressLint("CommitTransaction")
+    private fun showDialof(fragment: DialogFragment){
+        val transaction = supportFragmentManager.beginTransaction()
+
+        val previouseDialog = supportFragmentManager.findFragmentByTag("dialog")
+        if (previouseDialog != null) transaction.remove(previouseDialog)
+        fragment.show(transaction, "dialog")
     }
 }

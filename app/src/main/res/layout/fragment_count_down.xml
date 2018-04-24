@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="301dp"
+    android:paddingBottom="16dp"
+    android:paddingEnd="24dp"
+    android:paddingStart="24dp"
+    android:paddingTop="24dp"
+    tools:context="com.example.trmubaiwa.blueprint.Activities.autologout.CountDownDialogFragment">
+
+
+    <TextView
+        android:id="@+id/title_logout_count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:fontFamily="@font/roboto_medium"
+        android:lineSpacingExtra="24sp"
+        android:text="@string/app_logout"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Continue working?" />
+
+    <Button
+        android:id="@+id/btn_logout_continue"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_logout_count_down"
+        app:layout_constraintEnd_toStartOf="@+id/btn_logout_count_down"
+        app:layout_constraintTop_toTopOf="@+id/btn_logout_count_down" />
+
+    <Button
+        android:id="@+id/btn_logout_count_down"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@android:color/transparent"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_logout_count_down" />
+
+    <TextView
+        android:id="@+id/message_text_count_down"
+        android:layout_width="241dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/logout_countdown_message"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_logout_count_down"
+        tools:text="Session will end in 60 seconds." />
+
+</android.support.constraint.ConstraintLayout>

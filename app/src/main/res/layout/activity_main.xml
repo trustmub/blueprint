@@ -27,5 +27,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_black_24dp"/>
 
+    <Button
+        android:id="@+id/btn_start_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:text="Cont Down Timer"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

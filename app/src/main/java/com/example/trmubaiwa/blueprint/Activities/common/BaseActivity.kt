@@ -6,5 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.example.trmubaiwa.blueprint.Activities.LoginActivity
 import com.example.trmubaiwa.blueprint.App
 
-open class BaseActivity : AppCompatActivity()
+open class BaseActivity : AppCompatActivity(){
+
+}
 

@@ -94,4 +94,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="logout">Logout</string>
+    <string name="logout_countdown_message">Application will logout in %1$d seconds.</string>
+    <string name="app_logout">App Logout</string>
 </resources>

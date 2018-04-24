@@ -30,16 +30,14 @@
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.LogoutWarningActivity" />
-        <activity android:name=".Activities.Main2Activity" />
-        <activity
             android:name=".Activities.common.BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.LoginActivity"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
