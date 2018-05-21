@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.annotation.Nullable
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
@@ -19,6 +20,11 @@ import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_users_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.koin.android.architecture.ext.viewModel
+import android.widget.Toast
+import com.example.trmubaiwa.blueprint.Utilities.networking.ConnectionModel
+import com.example.trmubaiwa.blueprint.Utilities.networking.ConnectionLiveData
+import org.jetbrains.anko.toast
+
 
 class UsersListActivity : BaseActivity(), AnkoLogger {
 
@@ -33,15 +39,27 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users_list)
         layoutManager = LinearLayoutManager(this)
+//        displayListOnUi()
 
+        val connectionLiveData = ConnectionLiveData(applicationContext)
+        connectionLiveData.observe(this, Observer<ConnectionModel> { connection ->
+            if (connection!!.isConnected) {
+                getListFromApi()
+                when (connection.type) {
+                    1 -> toast("Wifi turned ON")
+                    2 -> toast("Mobile data turned ON")
+                }
+            } else {
+                toast("Connection turned OFF")
+                getListFromDatabase()
+            }
+        })
+
+    }
+
+    private fun displayListOnUi() {
         showProgressBar(true)
-        if (isNetworkAvailable()) {
-            getListFromApi()
-        } else {
-            getListFromDatabase()
-
-        }
-
+        if (isNetworkAvailable()) getListFromApi() else getListFromDatabase()
     }
 
     private fun getListFromApi() {
@@ -53,9 +71,11 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
                 startActivity(detailsIntent)
             }
             saveToDatabase(it)
-            userListView.adapter = adapter
-            userListView.layoutManager = layoutManager
-            userListView.setHasFixedSize(true)
+            userListView.let {
+                it.adapter = adapter
+                it.layoutManager = layoutManager
+                it.setHasFixedSize(true)
+            }
         })
     }
 
@@ -67,11 +87,12 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
                 detailsIntent.putExtra(EXTRA_USER_DETAILS, arrayOf(DataAccessType.OFFLINE, it.id.toString()))
 //                detailsIntent.putExtra(OFFLINE_EXTRA_USER_DETAILS, it.id.toString())
                 startActivity(detailsIntent)
-
             }
-            userListView.adapter = offLineAdapter
-            userListView.layoutManager = layoutManager
-            userListView.setHasFixedSize(true)
+            userListView.let {
+                it.adapter = offLineAdapter
+                it.layoutManager = layoutManager
+                it.setHasFixedSize(true)
+            }
         })
     }
 
