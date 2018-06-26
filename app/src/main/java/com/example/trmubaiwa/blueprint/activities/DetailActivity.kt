@@ -1,11 +1,10 @@
-package com.example.trmubaiwa.blueprint.Activities
+package com.example.trmubaiwa.blueprint.activities
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
+import com.example.trmubaiwa.blueprint.activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel

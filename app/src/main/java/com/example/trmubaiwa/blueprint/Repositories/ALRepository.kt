@@ -3,14 +3,13 @@ package com.example.trmubaiwa.blueprint.Repositories
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
+import com.example.trmubaiwa.blueprint.activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.BuildConfig
 import com.example.trmubaiwa.blueprint.Enums.ApplicationState
 import com.example.trmubaiwa.blueprint.Enums.TaskState
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.CACHE_EXPIRATION_VALUE
 import com.example.trmubaiwa.blueprint.Utilities.RESERVE_FOR_TIMER_VALUE
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import java.util.*

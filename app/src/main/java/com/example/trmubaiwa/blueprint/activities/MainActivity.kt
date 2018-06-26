@@ -1,13 +1,12 @@
-package com.example.trmubaiwa.blueprint.Activities
+package com.example.trmubaiwa.blueprint.activities
 
 import android.annotation.SuppressLint
-import android.app.Fragment
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.DialogFragment
 import android.util.Log
-import com.example.trmubaiwa.blueprint.Activities.autologout.CountDownDialogFragment
-import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
+import com.example.trmubaiwa.blueprint.activities.autologout.CountDownDialogFragment
+import com.example.trmubaiwa.blueprint.activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.ViewModels.AutoLogoutViewModel
 import kotlinx.android.synthetic.main.activity_main.*

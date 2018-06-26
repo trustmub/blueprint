@@ -1,7 +1,7 @@
 package com.example.trmubaiwa.blueprint
 
 import android.preference.PreferenceManager
-import com.example.trmubaiwa.blueprint.Activities.MainActivity
+import com.example.trmubaiwa.blueprint.activities.MainActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

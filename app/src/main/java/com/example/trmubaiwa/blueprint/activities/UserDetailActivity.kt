@@ -1,11 +1,10 @@
-package com.example.trmubaiwa.blueprint.Activities
+package com.example.trmubaiwa.blueprint.activities
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
+import com.example.trmubaiwa.blueprint.activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.Enums.DataAccessType
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
@@ -14,7 +13,6 @@ import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import kotlinx.android.synthetic.main.content_user_detail.*
 import org.jetbrains.anko.email
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 

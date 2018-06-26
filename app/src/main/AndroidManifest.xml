@@ -13,27 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.UsersListActivity" />
+        <activity android:name=".activities.UsersListActivity" />
         <activity
-            android:name=".Activities.UserDetailActivity"
+            android:name=".activities.UserDetailActivity"
             android:label="@string/title_activity_user_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.DetailActivity"
+            android:name=".activities.DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.common.BaseActivity"
+            android:name=".activities.common.BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.LoginActivity"></activity>
+        <activity android:name=".activities.LoginActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -1,14 +1,12 @@
-package com.example.trmubaiwa.blueprint.Activities
+package com.example.trmubaiwa.blueprint.activities
 
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.support.annotation.Nullable
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.example.trmubaiwa.blueprint.Activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.Adapters.OffLineUserListRecyclerAdapter
 import com.example.trmubaiwa.blueprint.Adapters.UserListRecyclerAdapter
 import com.example.trmubaiwa.blueprint.Enums.DataAccessType
@@ -16,14 +14,14 @@ import com.example.trmubaiwa.blueprint.Models.UserModel
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Rooms.UserEntity
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
+import com.example.trmubaiwa.blueprint.Utilities.networking.ConnectionLiveData
+import com.example.trmubaiwa.blueprint.Utilities.networking.ConnectionModel
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
+import com.example.trmubaiwa.blueprint.activities.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_users_list.*
 import org.jetbrains.anko.AnkoLogger
-import org.koin.android.architecture.ext.viewModel
-import android.widget.Toast
-import com.example.trmubaiwa.blueprint.Utilities.networking.ConnectionModel
-import com.example.trmubaiwa.blueprint.Utilities.networking.ConnectionLiveData
 import org.jetbrains.anko.toast
+import org.koin.android.architecture.ext.viewModel
 
 
 class UsersListActivity : BaseActivity(), AnkoLogger {

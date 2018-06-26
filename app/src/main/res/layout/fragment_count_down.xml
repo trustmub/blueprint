@@ -11,7 +11,7 @@
     android:paddingEnd="24dp"
     android:paddingStart="24dp"
     android:paddingTop="24dp"
-    tools:context="com.example.trmubaiwa.blueprint.Activities.autologout.CountDownDialogFragment">
+    tools:context="com.example.trmubaiwa.blueprint.activities.autologout.CountDownDialogFragment">
 
 
     <TextView

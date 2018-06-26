@@ -1,4 +1,4 @@
-package com.example.trmubaiwa.blueprint.Activities
+package com.example.trmubaiwa.blueprint.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
