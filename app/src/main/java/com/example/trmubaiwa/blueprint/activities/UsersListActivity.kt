@@ -27,6 +27,8 @@ import org.koin.android.architecture.ext.viewModel
 class UsersListActivity : BaseActivity(), AnkoLogger {
 
     private lateinit var adapter: UserListRecyclerAdapter
+
+
     private lateinit var offLineAdapter: OffLineUserListRecyclerAdapter
     private val userViewModel by viewModel<UserViewModel>()
     private lateinit var layoutManager: LinearLayoutManager
@@ -37,7 +39,6 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users_list)
         layoutManager = LinearLayoutManager(this)
-//        displayListOnUi()
 
         val connectionLiveData = ConnectionLiveData(applicationContext)
         connectionLiveData.observe(this, Observer<ConnectionModel> { connection ->
@@ -61,13 +62,15 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
     }
 
     private fun getListFromApi() {
-        userViewModel.getUsers().observe(this, Observer {
+        userViewModel.getUsers().observe(this, Observer { it ->
             showProgressBar(false)
+
             adapter = UserListRecyclerAdapter(this, it!!) {
                 val detailsIntent = Intent(this, UserDetailActivity::class.java)
                 detailsIntent.putExtra(EXTRA_USER_DETAILS, arrayOf(DataAccessType.ONLINE, it.id.toString()))
                 startActivity(detailsIntent)
             }
+
             saveToDatabase(it)
             userListView.let {
                 it.adapter = adapter
@@ -78,7 +81,7 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
     }
 
     private fun getListFromDatabase() {
-        userViewModel.getDbUsers().observe(this, Observer {
+        userViewModel.getDbUsers().observe(this, Observer { it ->
             showProgressBar(false)
             offLineAdapter = OffLineUserListRecyclerAdapter(this, it!!) {
                 val detailsIntent = Intent(this, UserDetailActivity::class.java)

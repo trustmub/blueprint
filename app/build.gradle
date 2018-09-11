@@ -55,7 +55,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:support-compat:26.1.0'
     testImplementation 'junit:junit:4.12'
@@ -92,6 +92,8 @@ dependencies {
     compile "org.jetbrains.anko:anko:$anko_version"
     compile "org.jetbrains.anko:anko-commons:$anko_version"
     compile "org.jetbrains.anko:anko-design:$anko_version"
+    compile "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
+
     /** Squire libraries, Retrofit moshi Gson for Kotlin etc */
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.moshi:moshi:1.5.0'
@@ -111,3 +113,7 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+androidExtensions {
+    experimental = true
+}
