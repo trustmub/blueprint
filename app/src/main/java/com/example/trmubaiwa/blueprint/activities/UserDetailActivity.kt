@@ -2,71 +2,62 @@ package com.example.trmubaiwa.blueprint.activities
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.util.Log
+import android.view.View
 import com.example.trmubaiwa.blueprint.activities.common.BaseActivity
 import com.example.trmubaiwa.blueprint.Enums.DataAccessType
+import com.example.trmubaiwa.blueprint.Models.UserParcel
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
 import com.example.trmubaiwa.blueprint.ViewModels.UserViewModel
 
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import kotlinx.android.synthetic.main.content_user_detail.*
-import org.jetbrains.anko.email
-import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
 class UserDetailActivity : BaseActivity() {
     private val userViewModel by inject<UserViewModel>()
-    private var phonenumber = ""
-    private var email = ""
-    private var location = arrayOf<Float>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_detail)
         setSupportActionBar(toolbar)
 
-        val passedUserDetails = intent.getStringExtra(EXTRA_USER_DETAILS)
+        val passedUserDetails = intent.getParcelableExtra<UserParcel>(EXTRA_USER_DETAILS)
 
-        Log.d("User", "The value is $passedUserDetails ")
-        Log.d("User", "The value is ${DataAccessType.values().get(1)} ")
-
-        nameDetailsText.text = passedUserDetails
+        cv_address_card.visibility = View.GONE
 
         if (passedUserDetails != null) {
-            Log.d("User", "The value at index 0 Zero ${passedUserDetails[0]} ")
-            userViewModel.getUsers().observe(this, Observer {
-                it?.filter {
-                    it.id == passedUserDetails.toInt()
-                }!!.map {
-                    nameDetailsText.text = it.name
-                    Log.d("User", "The value is ${nameDetailsText.text} ")
+            Log.d("User", "The value at index 0 Zero $passedUserDetails ")
+            tv_profile_name.text = passedUserDetails.name
+            tv_email.text = passedUserDetails.email
+            tv_initials.text = getInitials(passedUserDetails.name)
 
-                    phonenumber = it.phone
-                    email = it.email
-                    location = arrayOf(it.address.geo.lat.toFloat(), it.address.geo.lng.toFloat())
+            userViewModel.getUsers().observe(this, Observer { userList ->
+
+                userList?.filter {
+                    it.id == passedUserDetails.id.toInt()
+                }!!.map {
+                    cv_address_card.visibility = View.VISIBLE
+
+                    tv_profile_initials.text = getInitials(it.name)
+                    tv_address_city.text = it.address.city
+                    tv_address_street.text = it.address.street
+                    tv_address_zip.text = it.address.zipcode
+                    tv_address_title.text = getString(R.string.address_title, it.name)
                 }
             })
         }
+    }
 
+    fun closeAddress(v: View) {
+        cv_address_card.visibility = View.GONE
+    }
 
-        emailImage.setOnClickListener {
-            toast("Email clicked $email ")
-            email(email, "Send from application", "Email body content")
-        }
-        callImage.setOnClickListener {
-            toast("Call Icon Clicked $phonenumber")
-
-        }
-        locationImage.setOnClickListener {
-            toast("Location clicked with ${location[0]} and ${location[1]}")
-        }
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+    private fun getInitials(name: String): String {
+        var initials = ""
+        for (i in name.split(" ")) initials += i[0]
+        return initials.toUpperCase()
     }
 
 

@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import com.example.trmubaiwa.blueprint.Adapters.OffLineUserListRecyclerAdapter
 import com.example.trmubaiwa.blueprint.Adapters.UserListRecyclerAdapter
-import com.example.trmubaiwa.blueprint.Enums.DataAccessType
 import com.example.trmubaiwa.blueprint.Models.UserModel
+import com.example.trmubaiwa.blueprint.Models.UserParcel
 import com.example.trmubaiwa.blueprint.R
 import com.example.trmubaiwa.blueprint.Rooms.UserEntity
 import com.example.trmubaiwa.blueprint.Utilities.EXTRA_USER_DETAILS
@@ -27,6 +29,7 @@ import org.koin.android.architecture.ext.viewModel
 class UsersListActivity : BaseActivity(), AnkoLogger {
 
     private lateinit var adapter: UserListRecyclerAdapter
+    private lateinit var userDetailsParcelable: Parcelable
 
 
     private lateinit var offLineAdapter: OffLineUserListRecyclerAdapter
@@ -66,8 +69,12 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
             showProgressBar(false)
 
             adapter = UserListRecyclerAdapter(this, it!!) {
+
+                Log.d("UserDetails", it.name)
                 val detailsIntent = Intent(this, UserDetailActivity::class.java)
-                detailsIntent.putExtra(EXTRA_USER_DETAILS, arrayOf(DataAccessType.ONLINE, it.id.toString()))
+                userDetailsParcelable = UserParcel(it.id.toString(), it.name, it.email, it.phone, it.company.name)
+
+                detailsIntent.putExtra(EXTRA_USER_DETAILS, userDetailsParcelable)
                 startActivity(detailsIntent)
             }
 
@@ -85,7 +92,8 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
             showProgressBar(false)
             offLineAdapter = OffLineUserListRecyclerAdapter(this, it!!) {
                 val detailsIntent = Intent(this, UserDetailActivity::class.java)
-                detailsIntent.putExtra(EXTRA_USER_DETAILS, arrayOf(DataAccessType.OFFLINE, it.id.toString()))
+                userDetailsParcelable = UserParcel(it.id.toString(), it.name, it.email, it.phone, it.company)
+                detailsIntent.putExtra(EXTRA_USER_DETAILS, userDetailsParcelable)
 //                detailsIntent.putExtra(OFFLINE_EXTRA_USER_DETAILS, it.id.toString())
                 startActivity(detailsIntent)
             }

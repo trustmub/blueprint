@@ -61,7 +61,6 @@ class CountDownDialogFragment : DialogFragment() {
                 if (activity != null) activity.runOnUiThread { message_text_count_down?.text = getString(R.string.logout_countdown_message, seconds) }
                 if (seconds == 0L) logoutApplication()
             }
-
         }
         /** update the UI with new value every second */
         timer?.scheduleAtFixedRate(timerTask, 1000, 1000)

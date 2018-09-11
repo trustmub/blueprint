@@ -97,4 +97,6 @@
     <string name="logout">Logout</string>
     <string name="logout_countdown_message">Application will logout in %1$d seconds.</string>
     <string name="app_logout">App Logout</string>
+    <string name="profile_image_place_holder">profile image place holder</string>
+    <string name="address_title">%1$s\'s Address</string>
 </resources>
