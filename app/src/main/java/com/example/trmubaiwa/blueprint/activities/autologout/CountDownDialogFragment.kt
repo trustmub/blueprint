@@ -7,22 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.trmubaiwa.blueprint.R
+import com.example.trmubaiwa.blueprint.ViewModels.AutoLogoutViewModel
 import kotlinx.android.synthetic.main.fragment_count_down.*
 import kotlinx.android.synthetic.main.fragment_count_down.view.*
+import org.koin.android.ext.android.inject
 import java.util.*
 
 
 class CountDownDialogFragment : DialogFragment() {
 
+    private val autoLogoutViewModel by inject<AutoLogoutViewModel>()
+
     private var timer: Timer? = null
     private lateinit var timerTask: TimerTask
-    private var seconds = 60L
+    private var seconds = autoLogoutViewModel.getActiveExpirationTime().toLong()
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.fragment_count_down, container, false)
 
-        /** prevent dialog dismisal by pressing outside the dialog or back button*/
+        /** prevent dialog dismissal by pressing outside the dialog or back button*/
         this.dialog.let {
             it.setCanceledOnTouchOutside(false)
             it.setOnKeyListener { _, keyCode, _ -> keyCode == KeyEvent.KEYCODE_BACK }

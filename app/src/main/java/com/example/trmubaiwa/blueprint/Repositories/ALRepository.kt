@@ -17,7 +17,7 @@ import java.util.*
 /**
  * Created by trustmub on 2018/04/24.
  */
-class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig){
+class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig) {
     private var timer: Timer? = null
     private var applicationViewState: ApplicationState
     private var autoLogoutStatus: MutableLiveData<TaskState> = MutableLiveData()
@@ -94,7 +94,7 @@ class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig){
         return convertedTimerValue.toLong()
     }
 
-    //
+
     private fun getRemoteValues() {
         var cacheExpiration: Long = CACHE_EXPIRATION_VALUE
 
@@ -104,7 +104,7 @@ class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig){
         }
 
         remoteConfig.fetch(cacheExpiration)
-                .addOnCompleteListener(BaseActivity(), { task ->
+                .addOnCompleteListener(BaseActivity()) { task ->
                     if (task.isSuccessful) {
                         // task successful. Activate the fetched data
                         remoteConfig.activateFetched()
@@ -112,6 +112,6 @@ class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig){
                         //task failed
                         Log.e("Timer", "Fetch Failed: ${task.exception}")
                     }
-                })
+                }
     }
 }

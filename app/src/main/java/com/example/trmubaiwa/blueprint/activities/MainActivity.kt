@@ -32,7 +32,7 @@ class MainActivity : BaseActivity() {
 
         btn_start_countdown.setOnClickListener {
             Log.d("Timer","start Countdown clicked")
-            showDialof(CountDownDialogFragment())
+            showDialog(CountDownDialogFragment())
 
         }
 
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity() {
     }
 
     @SuppressLint("CommitTransaction")
-    private fun showDialof(fragment: DialogFragment){
+    private fun showDialog(fragment: DialogFragment){
         val transaction = supportFragmentManager.beginTransaction()
 
         val previouseDialog = supportFragmentManager.findFragmentByTag("dialog")
