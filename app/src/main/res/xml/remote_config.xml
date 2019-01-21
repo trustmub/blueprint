@@ -4,4 +4,8 @@
         <key>auto_logout_timeout</key>
         <value>5</value>
     </entry>
+    <entry>
+        <key>auto_logout_wait_time</key>
+        <value>3</value>
+    </entry>
 </defaultsMap>

@@ -8,7 +8,9 @@ import com.example.trmubaiwa.blueprint.BuildConfig
 import com.example.trmubaiwa.blueprint.Enums.ApplicationState
 import com.example.trmubaiwa.blueprint.Enums.TaskState
 import com.example.trmubaiwa.blueprint.R
+import com.example.trmubaiwa.blueprint.Services.TimerTaskService
 import com.example.trmubaiwa.blueprint.Utilities.CACHE_EXPIRATION_VALUE
+import com.example.trmubaiwa.blueprint.Utilities.CACHE_WAITING_VALUE
 import com.example.trmubaiwa.blueprint.Utilities.RESERVE_FOR_TIMER_VALUE
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -17,7 +19,7 @@ import java.util.*
 /**
  * Created by trustmub on 2018/04/24.
  */
-class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig) {
+class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig, private val timerTaskService: TimerTaskService) {
     private var timer: Timer? = null
     private var applicationViewState: ApplicationState
     private var autoLogoutStatus: MutableLiveData<TaskState> = MutableLiveData()
@@ -35,7 +37,7 @@ class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig) {
 
     fun startTimer() {
         Log.d("Timer", "Default timer: ${remoteConfig.getString("auto_logout_timeout")}")
-        var waitingTime = convertStringToLong()
+        var waitingTime = convertWaitingTimeStringToLong()
         stopTimer()
         timer = Timer()
         waitingTime = when (applicationViewState) {
@@ -44,22 +46,26 @@ class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig) {
         }
 
         Log.d("timer", "onStartTimer ApplicationState : ${applicationViewState}")
+        Log.d("timer", "Waiting timer set to : $waitingTime")
         timer?.schedule(TimerTaskRunner(), waitingTime)
     }
 
     inner class TimerTaskRunner : TimerTask() {
         override fun run() {
             when (applicationViewState) {
+
                 ApplicationState.FOREGROUNDED -> autoLogoutStatus.postValue(TaskState.COUNT_DOWN)
                 ApplicationState.BACKGROUNDED -> autoLogoutStatus.postValue(TaskState.EXPIRED)
             }
+            Log.d("timer", "TimerTask object running")
+            autoLogoutStatus.postValue(TaskState.COUNT_DOWN)
 
-            stopTimer()
         }
     }
 
     fun stopTimer() {
-        if (timer != null) timer?.cancel()
+        Log.d("timer", "User Interacted")
+        timer?.cancel()
     }
 
     fun getAutoLogoutTaskState(): LiveData<TaskState> = autoLogoutStatus
@@ -89,9 +95,16 @@ class ALRepository constructor(private val remoteConfig: FirebaseRemoteConfig) {
      * Value in the startTimer method
      * @Return Type: Long
      */
-    private fun convertStringToLong(): Long {
+    private fun convertLogoutTimerStringToLong(): Long {
         val convertedTimerValue = remoteConfig.getString("auto_logout_timeout").toDouble() * 60 * 1000
         return convertedTimerValue.toLong()
+    }
+
+    private fun convertWaitingTimeStringToLong(): Long {
+        val convertedTimeValue = remoteConfig.getString("auto_logout_wait_time")
+        Log.d("timer", "Waiting time converter : $convertedTimeValue") * 60 * 1000
+
+        return convertedTimeValue.toLong()
     }
 
 

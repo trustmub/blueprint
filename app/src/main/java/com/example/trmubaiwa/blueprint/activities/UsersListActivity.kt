@@ -56,7 +56,6 @@ class UsersListActivity : BaseActivity(), AnkoLogger {
                 getListFromDatabase()
             }
         })
-
     }
 
     private fun displayListOnUi() {

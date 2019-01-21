@@ -27,3 +27,5 @@ data class Address(@Json(name = "zipcode") val zipcode: String,
 data class Geo(@Json(name = "lng") val lng: String,
                @Json(name = "lat") val lat: String)
 
+
+data class TimerState(var startTimer: Boolean)

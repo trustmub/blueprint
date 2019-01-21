@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.persistence.room.Room
 import com.example.trmubaiwa.blueprint.Repositories.ALRepository
 import com.example.trmubaiwa.blueprint.Repositories.UserRepository
+import com.example.trmubaiwa.blueprint.Services.TimerTaskService
 import com.example.trmubaiwa.blueprint.Services.Webservice
 import com.example.trmubaiwa.blueprint.Utilities.AppDatabase
 import com.example.trmubaiwa.blueprint.ViewModels.AutoLogoutViewModel
@@ -33,6 +34,7 @@ open class App : Application() {
     open fun getGeneralModule() = applicationContext {
         provide(name = "context") { applicationContext }
         provide(isSingleton = true) { FirebaseRemoteConfig.getInstance() }
+        provide (isSingleton = false ){TimerTaskService()}
     }
 
     /** We are using the Room Object Relational mapper for android
@@ -66,7 +68,7 @@ open class App : Application() {
     /** for all you repositories that you need to inject */
     open fun getRepositoryModule(): Module = applicationContext {
         provide { UserRepository(get(), get(), get()) }
-        provide { ALRepository(get()) }
+        provide { ALRepository(get(), get()) }
     }
 
 
